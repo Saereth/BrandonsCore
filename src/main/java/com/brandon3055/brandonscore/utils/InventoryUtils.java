@@ -65,7 +65,7 @@ public class InventoryUtils {
      * @param validator An optional validator that allows you to specifu if an item is valid for the inventory
      */
     public static void handleAddOrTakeStack(int slot, IInventory inventory, EntityPlayer player, @Nullable Predicate<ItemStack> validator) {
-        if (player.worldObj.isRemote) {
+        if (player.world.isRemote) {
             return;
         }
         if (inventory.getStackInSlot(slot) != null) {
@@ -73,7 +73,7 @@ public class InventoryUtils {
                 player.setHeldItem(EnumHand.MAIN_HAND, inventory.getStackInSlot(slot));
                 inventory.setInventorySlotContents(slot, null);
             } else {
-                player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, inventory.getStackInSlot(slot)));
+                player.world.spawnEntity(new EntityItem(player.world, player.posX, player.posY, player.posZ, inventory.getStackInSlot(slot)));
                 inventory.setInventorySlotContents(slot, null);
             }
         }

@@ -43,7 +43,7 @@ public class TileBCBase extends TileEntity {
     }
 
     public void detectAndSendChanges(boolean forceSync) {
-        if (worldObj.isRemote) return;
+        if (world.isRemote) return;
         for (SyncableObject syncableObject : syncableObjectMap.values()) {
             if (syncableObject.syncInTile) {
                 syncableObject.detectAndSendChanges(this, null, forceSync);
@@ -52,7 +52,7 @@ public class TileBCBase extends TileEntity {
     }
 
     public void detectAndSendChangesToPlayer(boolean forceSync, EntityPlayerMP playerMP) {
-        if (worldObj.isRemote) return;
+        if (world.isRemote) return;
         for (SyncableObject syncableObject : syncableObjectMap.values()) {
             if (syncableObject.syncInContainer) {
                 syncableObject.detectAndSendChanges(this, playerMP, forceSync);
@@ -97,20 +97,20 @@ public class TileBCBase extends TileEntity {
     }
 
     public NetworkRegistry.TargetPoint syncRange() {
-        if (viewRange == -1 && !worldObj.isRemote) {
+        if (viewRange == -1 && !world.isRemote) {
             Field f = ReflectionHelper.findField(PlayerChunkMap.class, "playerViewRadius", "field_72698_e");
             f.setAccessible(true);
             try {
-                viewRange = f.getInt(((WorldServer) worldObj).getPlayerChunkMap());
+                viewRange = f.getInt(((WorldServer) world).getPlayerChunkMap());
             }
             catch (IllegalAccessException e) {
                 BCLogHelper.error("A THING BROKE!!!!!!!");
                 e.printStackTrace();
             }
-        } else if (worldObj.isRemote) {
+        } else if (world.isRemote) {
             BCLogHelper.error("Hay! Someone is doing a bad thing!!! Check your side!!!!!!!");
         }
-        return new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), viewRange * 16);
+        return new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), viewRange * 16);
     }
 
     //Used to sync data to the client
@@ -201,12 +201,12 @@ public class TileBCBase extends TileEntity {
     //region Helper Functions.
 
     public void updateBlock() {
-        IBlockState state = worldObj.getBlockState(getPos());
-        worldObj.notifyBlockUpdate(getPos(), state, state, 3);
+        IBlockState state = world.getBlockState(getPos());
+        world.notifyBlockUpdate(getPos(), state, state, 3);
     }
 
     public void dirtyBlock() {
-        Chunk chunk = worldObj.getChunkFromBlockCoords(getPos());
+        Chunk chunk = world.getChunkFromBlockCoords(getPos());
         chunk.setChunkModified();
     }
 
@@ -219,7 +219,7 @@ public class TileBCBase extends TileEntity {
     }
 
     public IBlockState getState(Block expectedBlock) {
-        IBlockState state = worldObj.getBlockState(pos);
+        IBlockState state = world.getBlockState(pos);
         return state.getBlock() == expectedBlock ? state : expectedBlock.getDefaultState();
     }
 

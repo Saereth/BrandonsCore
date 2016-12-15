@@ -67,7 +67,7 @@ public class MGuiStackIcon extends MGuiElementBase {
     @Override
     public void renderOverlayLayer(Minecraft minecraft, int mouseX, int mouseY, float partialTicks) {
         if (isMouseOver(mouseX - xOffset, mouseY - yOffset) && (drawToolTip || toolTipOverride != null)) {
-            List<String> list = toolTipOverride != null ? toolTipOverride : getStack().getTooltip(minecraft.thePlayer, minecraft.gameSettings.advancedItemTooltips);
+            List<String> list = toolTipOverride != null ? toolTipOverride : getStack().getTooltip(minecraft.player, minecraft.gameSettings.advancedItemTooltips);
             drawHoveringText(list, mouseX, mouseY, minecraft.fontRendererObj, modularGui.screenWidth(), modularGui.screenHeight());
         }
     }

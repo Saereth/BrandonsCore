@@ -31,12 +31,12 @@ public class TeleportUtils {
      * @return the entity. This may be a new instance so be sure to keep that in mind.
      */
     public static Entity teleportEntity(Entity entity, int dimension, double xCoord, double yCoord, double zCoord, float yaw, float pitch) {
-        if (entity == null || entity.worldObj.isRemote || entity.isBeingRidden()) {
+        if (entity == null || entity.world.isRemote || entity.isBeingRidden()) {
             return entity;
         }
 
         MinecraftServer server = entity.getServer();
-        int sourceDim = entity.worldObj.provider.getDimension();
+        int sourceDim = entity.world.provider.getDimension();
 
         Entity mount = null;
 
@@ -78,7 +78,7 @@ public class TeleportUtils {
      * This is the base teleport method that figures out how to handle the teleport and makes it happen!
      */
     private static Entity handleEntityTeleport(Entity entity, MinecraftServer server, int sourceDim, int targetDim, double xCoord, double yCoord, double zCoord, float yaw, float pitch) {
-        if (entity == null || entity.worldObj.isRemote) {
+        if (entity == null || entity.world.isRemote) {
             return entity;
         }
 
@@ -131,7 +131,7 @@ public class TeleportUtils {
             newEntity.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, pitch);
             boolean flag = newEntity.forceSpawn;
             newEntity.forceSpawn = true;
-            targetWorld.spawnEntityInWorld(newEntity);
+            targetWorld.spawnEntity(newEntity);
             newEntity.forceSpawn = flag;
             targetWorld.updateEntityWithOptionalForce(newEntity, false);
         }
@@ -161,7 +161,7 @@ public class TeleportUtils {
 
         player.setLocationAndAngles(xCoord, yCoord, zCoord, yaw, pitch);
         player.connection.setPlayerLocation(xCoord, yCoord, zCoord, yaw, pitch);
-        targetWorld.spawnEntityInWorld(player);
+        targetWorld.spawnEntity(player);
         targetWorld.updateEntityWithOptionalForce(player, false);
         player.setWorld(targetWorld);
 

@@ -71,7 +71,7 @@ public class ContainerBCBase<T extends TileBCBase> extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
-        if (tile instanceof IInventory) return ((IInventory) tile).isUseableByPlayer(playerIn);
+        if (tile instanceof IInventory) return ((IInventory) tile).isUsableByPlayer(playerIn);
         return tile != null;
     }
 }

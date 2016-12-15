@@ -195,7 +195,7 @@ public class PacketTileMessage implements IMessage {
         @Override
         public IMessage handleMessage(PacketTileMessage message, MessageContext ctx) {
             if (ctx.side == Side.SERVER) {
-                TileEntity tile = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.tilePos);
+                TileEntity tile = ctx.getServerHandler().playerEntity.world.getTileEntity(message.tilePos);
                 if (tile instanceof TileBCBase) {
                     ((TileBCBase) tile).receivePacketFromClient(message, ctx.getServerHandler().playerEntity);
                 }

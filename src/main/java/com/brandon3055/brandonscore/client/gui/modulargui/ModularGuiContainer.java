@@ -188,15 +188,15 @@ public abstract class ModularGuiContainer<T extends Container> extends GuiContai
         if (hide && !slotsHidden) {
             slotsHidden = true;
             for (Slot slot : container.inventorySlots) {
-                slot.xDisplayPosition += 1000;
-                slot.yDisplayPosition += 1000;
+                slot.xPos += 1000;
+                slot.yPos += 1000;
             }
         }
         else if (!hide && slotsHidden) {
             slotsHidden = false;
             for (Slot slot : container.inventorySlots) {
-                slot.xDisplayPosition -= 1000;
-                slot.yDisplayPosition -= 1000;
+                slot.xPos -= 1000;
+                slot.yPos -= 1000;
             }
         }
     }

@@ -310,7 +310,7 @@ public class MGuiEntityFilter extends MGuiElementBase implements IMGuiListener {
             ArrayList<Entity> listCantRender = new ArrayList<>();
 
             for (String name : EntityList.getEntityNameList()) {
-                Entity entity = EntityList.createEntityByName(name, modularGui.getMinecraft().theWorld);
+                Entity entity = EntityList.createEntityByName(name, modularGui.getMinecraft().world);
                 if (entity == null) {
                     continue;
                 }

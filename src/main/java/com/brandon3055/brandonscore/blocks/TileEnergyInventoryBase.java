@@ -27,14 +27,14 @@ public class TileEnergyInventoryBase extends TileInventoryBase {
 
     @Override
     public void detectAndSendChanges(boolean forceSync) {
-        if (worldObj.isRemote) return;
+        if (world.isRemote) return;
         energyStored.value = energyStorage.getEnergyStored();
         super.detectAndSendChanges(forceSync);
     }
 
     @Override
     public void detectAndSendChangesToPlayer(boolean forceSync, EntityPlayerMP playerMP) {
-        if (worldObj.isRemote) return;
+        if (world.isRemote) return;
         energyStored.value = energyStorage.getEnergyStored();
         super.detectAndSendChangesToPlayer(forceSync, playerMP);
     }
@@ -89,7 +89,7 @@ public class TileEnergyInventoryBase extends TileInventoryBase {
         if (getEnergyStored() == 0) {
             return 0;
         }
-        TileEntity tile = worldObj.getTileEntity(pos.add(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()));
+        TileEntity tile = world.getTileEntity(pos.add(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()));
         if (tile != null && EnergyHelper.canReceiveEnergy(tile, side)) {
             return EnergyHelper.insertEnergy(tile, getEnergyStored(), side, false);
         }

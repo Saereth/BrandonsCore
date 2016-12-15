@@ -27,14 +27,14 @@ public class TileEnergyBase extends TileBCBase implements IDataRetainerTile {
 
     @Override
     public void detectAndSendChanges(boolean forceSync) {
-        if (worldObj.isRemote) return;
+        if (world.isRemote) return;
         energyStored.value = energyStorage.getEnergyStored();
         super.detectAndSendChanges(forceSync);
     }
 
     @Override
     public void detectAndSendChangesToPlayer(boolean forceSync, EntityPlayerMP playerMP) {
-        if (worldObj.isRemote) return;
+        if (world.isRemote) return;
         energyStored.value = energyStorage.getEnergyStored();
         super.detectAndSendChangesToPlayer(forceSync, playerMP);
     }
@@ -87,7 +87,7 @@ public class TileEnergyBase extends TileBCBase implements IDataRetainerTile {
         if (getEnergyStored() == 0) {
             return 0;
         }
-        TileEntity tile = worldObj.getTileEntity(pos.add(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()));
+        TileEntity tile = world.getTileEntity(pos.add(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()));
         if (tile != null && EnergyHelper.canReceiveEnergy(tile, side)) {
             return EnergyHelper.insertEnergy(tile, getEnergyStored(), false);
         }

@@ -195,7 +195,7 @@ public abstract class ComponentBase extends Gui {
     }
 
     protected void renderToolTip(ItemStack stack, int x, int y) {
-        List list = stack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
+        List list = stack.getTooltip(this.mc.player, this.mc.gameSettings.advancedItemTooltips);
 
         for (int k = 0; k < list.size(); ++k) {
             if (k == 0) {

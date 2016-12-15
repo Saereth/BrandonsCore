@@ -54,7 +54,7 @@ public class FeatureUtils {
         entityItem.motionY = world.rand.nextGaussian() * 0.05 + 0.2F;
         entityItem.motionZ = world.rand.nextGaussian() * 0.05;
         entityItem.setNoPickupDelay();
-        world.spawnEntityInWorld(entityItem);
+        world.spawnEntity(entityItem);
     }
 
 }

@@ -81,16 +81,7 @@ public class TileInventoryBase extends TileBCBase implements IInventory, IDataRe
         return stackLimit;
     }
 
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        if (worldObj == null) {
-            return false;
-        }
-        else if (worldObj.getTileEntity(pos) != this) {
-            return false;
-        }
-        return player.getDistanceSq(pos.add(0.5, 0.5, 0.5)) < 64;
-    }
+
 
     @Override
     public void openInventory(EntityPlayer player) {
@@ -175,4 +166,16 @@ public class TileInventoryBase extends TileBCBase implements IInventory, IDataRe
     public void readRetainedData(NBTTagCompound dataCompound) {
         readInventoryFromNBT(dataCompound);
     }
+
+    
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+        if (world == null) {
+            return false;
+        }
+        else if (world.getTileEntity(pos) != this) {
+            return false;
+        }
+        return player.getDistanceSq(pos.add(0.5, 0.5, 0.5)) < 64;
+	}
 }

@@ -76,11 +76,6 @@ public class ItemHandlerInventoryWrapper implements IInventory {
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        return true;
-    }
-
-    @Override
     public void openInventory(EntityPlayer player) {
 
     }
@@ -133,4 +128,9 @@ public class ItemHandlerInventoryWrapper implements IInventory {
     public ITextComponent getDisplayName() {
         return null;
     }
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return true;
+	}
 }

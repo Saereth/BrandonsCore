@@ -83,11 +83,6 @@ public class InventoryDynamic implements IInventory {
     public void markDirty() {}
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        return true;
-    }
-
-    @Override
     public void openInventory(EntityPlayer player) {
 
     }
@@ -159,4 +154,9 @@ public class InventoryDynamic implements IInventory {
             stacks.add(ItemStack.loadItemStackFromNBT(list.getCompoundTagAt(i)));
         }
     }
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		return true;
+	}
 }

@@ -43,7 +43,7 @@ public class MGuiEntityRenderer extends MGuiElementBase {
 
     public MGuiEntityRenderer setEntity(String entity) {
         if (!entityCache.containsKey(entity)) {
-            entityCache.put(entity, EntityList.createEntityByName(entity, modularGui.getMinecraft().theWorld));
+            entityCache.put(entity, EntityList.createEntityByName(entity, modularGui.getMinecraft().world));
         }
         this.entity = entityCache.get(entity);
         return this;
